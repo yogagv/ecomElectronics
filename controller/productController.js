@@ -138,6 +138,30 @@ export const productByName = async (req, res, next) => {
 }
 
 
+export const productByDiscount = async (req, res, next) => {
+
+    try{
+
+        const product = await Product.find({discount: { $gt: 0 } });
+
+        if(!product || product.length === 0) {
+
+            return res.status(404).send({success:false, message:"Product not Found"});
+        }
+
+            res.status(200).send({success:true, message:"Product found successfully!", data: product});
+
+
+    }catch(error){
+
+        res.status(500).send({success:false, message:"Internal Server Error!"});
+
+           
+    }
+
+}
+
+
 
 export const updateProduct = async (req, res, next) => {
 
