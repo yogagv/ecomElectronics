@@ -33,6 +33,16 @@ const dbConnect = async () => {
 
 app.use(express.json());
 
+app.use(cors ({
+
+    origin: function (origin, callback) {
+
+        return callback(null, true)
+    },
+        optionsSuccessStatus: 200,
+        credentials: true
+}));
+
 app.use(cookieparser());
 
 app.use("/api/v1/auth", authRoute);
