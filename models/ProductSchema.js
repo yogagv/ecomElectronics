@@ -51,6 +51,15 @@ const ProductSchema = new mongoose.Schema({
                 ref: "Review",
             },
 
+            rating: {
+
+                type: String
+            },
+
+            Comment: {
+
+                type: String
+            }
         }],
 
         ratingsQuantity: {

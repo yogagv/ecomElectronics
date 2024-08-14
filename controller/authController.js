@@ -66,7 +66,7 @@ export const userLogin = async (req, res, next) => {
 
         const {password, role, ...rest} = user._doc
 
-        res.status(200).json({success:true, message:"Login Successful!", token, data:{...rest}});
+        res.status(200).json({success:true, message:"Login Successful!", token, role, data:{...rest}});
 
 
     }catch(error){

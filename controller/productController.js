@@ -51,13 +51,15 @@ export const allProduct = async (req, res, next) => {
 
     try{
 
-        const products = await Product.find();
+        const products = await Product.find().populate('reviews');
 
         res.status(200).json({success:true, message:"Products Found Successfully!", data: products});
 
     }catch(error){
 
         res.status(404).json({success:false, message:"No Product Found!"})
+
+        console.log(error.message);
 
     }
 
@@ -69,7 +71,7 @@ export const singleProduct = async (req, res, next) => {
 
     try{
 
-        const product = await Product.findById(productId);
+        const product = await Product.findById(productId).populate('reviews');
 
         if(!product){
 
@@ -94,7 +96,7 @@ export const productByCategory = async (req, res, next) => {
 
     try{
 
-        const product = await Product.find({category: new RegExp( productCategory, "i") });
+        const product = await Product.find({category: new RegExp( productCategory, "i") }).populate('reviews');
 
         if(!product || product.length === 0) {
 
@@ -119,7 +121,7 @@ export const productByName = async (req, res, next) => {
 
     try{
 
-        const product = await Product.find({name: new RegExp( productName, "i") });
+        const product = await Product.find({name: new RegExp( productName, "i") }).populate('reviews');
 
         if(!product || product.length === 0) {
 
@@ -142,7 +144,7 @@ export const productByDiscount = async (req, res, next) => {
 
     try{
 
-        const product = await Product.find({discount: { $gt: 0 } });
+        const product = await Product.find({discount: { $gt: 0 } }).populate('reviews');
 
         if(!product || product.length === 0) {
 
@@ -169,7 +171,7 @@ export const updateProduct = async (req, res, next) => {
 
         try {
 
-            const productUpdate = await Product.findByIdAndUpdate(productId, {$set : req.body}, {$new : true});
+            const productUpdate = await Product.findByIdAndUpdate(productId, {$set : req.body}, {$new : true}).populate('reviews');
 
             res.status(200).send({success:true, message:"Product Updated Successfully!", productUpdate});
 

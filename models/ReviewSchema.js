@@ -21,6 +21,7 @@ const ReviewSchema = new mongoose.Schema({
             required: true
         },
         name: {
+
             type:String,
         }
     },
@@ -28,12 +29,13 @@ const ReviewSchema = new mongoose.Schema({
     rating: {
 
         type: String,
-        min: 0,
-        max: 5,
+        min: '0',
+        max: '5',
         default: "Not rated"
     },
 
     Comment: {
+
         type: String
     },
 
