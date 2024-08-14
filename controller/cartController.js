@@ -51,7 +51,7 @@ export const addtoCart = async (req, res, next) => {
             user: {
 
                 id: userId,
-                name: req.body.name
+                name: user.name
             },
 
             product: {
@@ -113,13 +113,14 @@ export const removeCart = async (req, res, next) => {
 
     const { quantity,  total, totalAmount } = req.body
 
+    const userId = req.params.id;
+    const productId = req.params.productId;
+
+    console.log(userId); 
+    console.log(productId);
+
+
     try{
-
-        const userId = req.userId;
-        const productId = req.params.productId;
-
-        console.log(productId);
-        console.log(userId); 
 
         const product = await Product.findById(productId);
         const user = await User.findById(userId);
