@@ -59,7 +59,7 @@ export const userLogin = async (req, res, next) => {
 
         if(!isPasswordMatch) {
 
-            res.status(400).json({success:false, message:"Invalid Password!"});
+            return res.status(400).json({success:false, message:"Invalid Password!"});
         }
 
         const token = generateToken(user)
